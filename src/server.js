@@ -20,15 +20,8 @@ const eventPool = require('../eventPool');
 const driverHandler = require('./drivers/handlerDrivers');
 const vendorHandler = require('./vendors/handleVendors');
 
-function event(payload){
-  const payloadObj = {
-    timestamp: Date.now(),
-    payload: payload
-  }
-  console.log(`EVENT: ${JSON.stringify(payloadObj)}`);
-}
-
 // .on() is used to listen for an event
+eventPool.on('VENDOR_PICKUP', vendorHandler.pickup);
 eventPool.on('PICKUP', driverHandler.pickup);
 eventPool.on('IN-TRANSIT', driverHandler.delivered);
 eventPool.on('DELIVERED', vendorHandler.delivered);
@@ -43,9 +36,9 @@ setInterval(() => {
     customer: chance.name(),
     address: chance.address(),
   };
-  eventPool.emit('PICKUP', { payload });
+  eventPool.emit('VENDOR_PICKUP', { payload });
 
 }, 5000);
 
 
-module.exports = { event };
+// module.exports = { event };

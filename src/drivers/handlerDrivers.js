@@ -9,7 +9,7 @@
 */
 
 let eventPool = require('../../eventPool');
-// const { event } = require('../server');
+const eventLogger = require('../util');
 
 const driver = {};
 
@@ -19,13 +19,15 @@ const driver = {};
 driver.pickup = (payload) => {
   setTimeout(() => {
     if(payload){
-      console.log(`DRIVER: picked up your package! id: ${payload}`);
+      const orderId = payload.payload.orderId;
+      console.log(`DRIVER: picked up your package! ${orderId}`);
       const eventObj = {
         event: 'in-transit',
         time: Date.now(),
         payload,
       }
-      console.log(eventObj);
+      // console.log(eventObj);
+      eventLogger(payload, 'in-transit');
 
       eventPool.emit('IN-TRANSIT', payload);
     }
@@ -35,7 +37,8 @@ driver.pickup = (payload) => {
 driver.delivered = (payload) => {
   setTimeout(() => {
     if(payload){
-      console.log(`DRIVER: delivered package successfully! id: ${payload}`);
+      const orderId = payload.payload.orderId;
+      console.log(`DRIVER: delivered package successfully! ${orderId}`);
       eventPool.emit('DELIVERED', payload);
     }
   }, 1000)
