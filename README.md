@@ -5,7 +5,11 @@
   A real-time service that allows for vendors, such as flower shops or restaurants, to alert a system of a package needing to be delivered, for drivers to instantly see what’s in their pickup queue, and then to alert the vendors as to the state of the deliveries (in transit, and then delivered).
 
 ### Phase 1
-  - Create event emitters and listeners to notify 
+  - Create event emitters and listeners to notify   
+    - Event Handlers: 
+      - PICKUP
+      - IN-TRANSIT
+      - DELIVERED
 
 #### User Stories
 
@@ -15,4 +19,6 @@
     As a driver, I want to alert the system when a package has been delivered.
     As a vendor, I want to be notified when my package has been delivered.
 
-UML
+![UML]('./lab-11-UML.png')
+
+latest PR: https://github.com/nurselaine/caps
