@@ -8,43 +8,52 @@
     - Emit a ‘delivered` event to the Global Event Pool with the order payload.
 */
 
-let eventPool = require('../../eventPool');
-const eventLogger = require('../util');
+module.exports = (socket) => (payload) => {
+  const orderId = payload.payload.orderId;
+  console.log('driver pick up now emitting delivered')
+  console.log(`DRIVER: picked up your package! ${orderId}`);
+  socket.emit('DELIVERED', payload);
+}
 
-const driver = {};
+// let eventPool = require('../../eventPool');
+// const eventLogger = require('../util');
+
+
+
+// const driver = {};
 
 // eventPool.on('pickup', () => {console.log(`DRIVER: picked up ${payload.orderId}`);});
 // eventPool.on('delivered', () => {console.log(`DRIVER: delivered ${payload.orderId}`);});
 
-driver.pickup = (payload) => {
-  setTimeout(() => {
-    if(payload){
-      const orderId = payload.payload.orderId;
-      console.log(`DRIVER: picked up your package! ${orderId}`);
-      const eventObj = {
-        event: 'in-transit',
-        time: Date.now(),
-        payload,
-      }
-      // console.log(eventObj);
-      eventLogger(payload, 'in-transit');
+// driver.pickup = (payload) => {
+//   setTimeout(() => {
+//     if(payload){
+//       const orderId = payload.payload.orderId;
+//       console.log(`DRIVER: picked up your package! ${orderId}`);
+//       const eventObj = {
+//         event: 'in-transit',
+//         time: Date.now(),
+//         payload,
+//       }
+//       // console.log(eventObj);
+//       eventLogger(payload, 'in-transit');
 
-      eventPool.emit('IN-TRANSIT', payload);
-    }
-  }, 1000)
-}
+//       eventPool.emit('IN-TRANSIT', payload);
+//     }
+//   }, 1000)
+// }
 
-driver.delivered = (payload) => {
-  setTimeout(() => {
-    if(payload){
-      const orderId = payload.payload.orderId;
-      console.log(`DRIVER: delivered package successfully! ${orderId}`);
-      eventPool.emit('DELIVERED', payload);
-    }
-  }, 1000)
-}
+// driver.delivered = (payload) => {
+//   setTimeout(() => {
+//     if(payload){
+//       const orderId = payload.payload.orderId;
+//       console.log(`DRIVER: delivered package successfully! ${orderId}`);
+//       eventPool.emit('DELIVERED', payload);
+//     }
+//   }, 1000)
+// }
 
-module.exports = driver;
+// module.exports = driver;
 
 // module.exports = (payload) => {
 //   eventPool.emit('DELIVERED', (payload) => console.log(payload));

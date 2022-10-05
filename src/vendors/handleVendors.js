@@ -2,35 +2,46 @@
 
 const Chance = require('chance');
 const eventPool = require('../../eventPool');
-const eventLogger = require('../util');
+const { io } = require('socket.io-client');
 
-const vendor = {};
+const chance = new Chance();
+const socket = io('http://localhost:3002/caps');
 
-vendor.delivered = (payload) => {
-  setTimeout(() => {
-    const name = payload.payload.customer;
-    console.log(`VENDOR: Thank you for delivering package! Enjoy ${name}!`);
-    // event(payload);
-    const eventObj = {
-      time: Date.now().toLocaleString(),
-      payload,
-    }
-    // console.log(eventObj);
-    eventLogger(payload, 'delivered');
-  }, 1000);
+module.exports = (socket) => (text) => {
+  socket.emit('PICKUP', { text });
 }
 
-vendor.pickup = (payload) => {
-  setTimeout(() => {
 
-    if (payload) {
-      eventLogger(payload, 'pickup');
-      eventPool.emit('PICKUP', payload);
-    }
-  }, 1000);
-}
 
-module.exports = vendor;
+
+
+// const vendor = {};
+
+// vendor.delivered = (payload) => {
+//   setTimeout(() => {
+//     const name = payload.payload.customer;
+//     console.log(`VENDOR: Thank you for delivering package! Enjoy ${name}!`);
+//     // event(payload);
+//     const eventObj = {
+//       time: Date.now().toLocaleString(),
+//       payload,
+//     }
+//     // console.log(eventObj);
+//     eventLogger(payload, 'delivered');
+//   }, 1000);
+// }
+
+// vendor.pickup = (payload) => {
+//   setTimeout(() => {
+
+//     if (payload) {
+//       eventLogger(payload, 'pickup');
+//       eventPool.emit('PICKUP', payload);
+//     }
+//   }, 1000);
+// };
+
+// module.exports = vendor;
 
 // module.exports = (storeName) => {
 
