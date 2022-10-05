@@ -8,8 +8,16 @@
   - Create event emitters and listeners to notify   
     - Event Handlers: 
       - PICKUP
+        - will emit from vendor
+        - will listen from server
+        - will emit to driver
       - IN-TRANSIT
+        - will emit from driver
+        - will ALSO emit DELIVERED from driver
+        - will listen from server
       - DELIVERED
+        - will listen from server
+        - will emit to vendor
 
 #### User Stories
 
@@ -19,6 +27,6 @@
     As a driver, I want to alert the system when a package has been delivered.
     As a vendor, I want to be notified when my package has been delivered.
 
-![UML]('./lab-11-UML.png')
 
 latest PR: https://github.com/nurselaine/caps
+UML: https://www.figma.com/file/MwgtqvhGUv38aeQcWk3vW7/Untitled?node-id=0%3A1

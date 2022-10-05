@@ -4,5 +4,8 @@ module.exports = (socket) => (payload) => {
   const orderId = payload.payload.orderId;
   console.log(`DRIVER: picked up your package! ${orderId}`);
   socket.emit('IN-TRANSIT', payload);
-  socket.emit('DELIVERED', payload);
+  setTimeout(() => {
+    console.log(`DRIVER: delivered your package! ${orderId}`);
+    socket.emit('DELIVERED', payload);
+  }, 500)
 };
