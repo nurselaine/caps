@@ -8,6 +8,6 @@ const handleTransitMessage = createTransitMessage(socket);
 
 socket.emit('JOIN', 'driver');
 
-socket.on('DRIVER_PICKUP', (payload) => {
+socket.on('PICKUP', (payload) => {
   handleTransitMessage(payload);
 });
