@@ -27,7 +27,6 @@ caps.on('connection', (socket) => {
   })
 
   socket.on('DELIVERED', (payload) => {
-
     eventLogger(payload, 'delivered');
     caps.emit('DELIVERED', payload);
   })
