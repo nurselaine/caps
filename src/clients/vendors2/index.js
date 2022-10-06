@@ -1,15 +1,10 @@
 'use strict';
 
 const Chance = require('chance');
-const { io } = require('socket.io-client');
-// const createVendorPayload = require('./handleVendors');
 const MessageClient = require('../lib/MessageClient');
 
 const chance = new Chance();
-const socket = io('http://localhost:3002/caps');
-// const sendPayload = createVendorPayload(socket);
-const vendorName = '1-206-flowers';
-// const vendorId = `${chance.guid()}-${vendorName}`;
+const vendorName = 'acme-widgets';
 const messenger = new MessageClient(vendorName);
 
 messenger.publish('GET_ALL', { queueId: vendorName, event: 'RECEIVED'});
