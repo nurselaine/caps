@@ -19,13 +19,22 @@
         - will listen from server
         - will emit to vendor
 
+### START 
+  - Navigate three terminals
+    1. src/server then run - node server.js
+      - this represents the HUB/Main Event Pool
+    2. src/server/client/vendor then run - node index.js
+      - this is the vendor client server
+    3. src/server/client/driver then run - node index.js
+      - this is the driver client server
+
 #### User Stories
 
-    As a vendor, I want to alert the system when I have a package to be picked up.
-    As a driver, I want to be notified when there is a package to be delivered.
-    As a driver, I want to alert the system when I have picked up a package and it is in transit.
-    As a driver, I want to alert the system when a package has been delivered.
-    As a vendor, I want to be notified when my package has been delivered.
+    As a vendor, I want to “subscribe” to “delivered” notifications so that I know when my packages are delivered.
+    As a vendor, I want to “catch up” on any “delivered” notifications that I might have missed so that I can see a complete log.
+    As a driver, I want to “subscribe” to “pickup” notifications so that I know what packages to deliver.
+    As a driver, I want to “catch up” on any “pickup” notifications I may have missed so that I can deliver everything.
+    As a driver, I want a way to “scan” a delivery so that the vendors know when a package has been delivered.
 
 
 latest PR: https://github.com/nurselaine/caps
