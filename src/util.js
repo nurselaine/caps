@@ -5,7 +5,7 @@ const eventLogger = (payload, name) => {
   const payloadObj = {
     event: name,
     timestamp: d,
-    payload,
+    payload: payload.payload,
   }
   console.log(`EVENT: ${JSON.stringify(payloadObj)}`);
 }
