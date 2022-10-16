@@ -19,6 +19,18 @@
         - will listen from server
         - will emit to vendor
 
+### Phase 2
+  - Refactor networkign implementation of CAPS system to Socket.io
+  - Clients will now communicate over a network 
+    - Socket.io will broadcast events between clients
+    - Utilize a namesapce called caps that will recieve all caps events
+    - Clients will be connected to this namesspace and the server will emit specific events to each socket that is listening for their events from the server
+    - Keep the same Events
+      - PICKUP
+      - IN-TRANSIT
+      - DELIVERED
+    - There will be multiple vendors that are only listening to for specific events based on the vendor ID, create a room for each client to emit specific events to
+
 ### START 
   - Navigate three terminals
     1. src/server then run - node server.js

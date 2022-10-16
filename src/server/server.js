@@ -46,16 +46,6 @@ caps.on('connection', (socket) => {
 
     driverQueue.store(payload.messageId, payload); // this is storing key value inside of the vendor queue within the client queue
 
-    // when a pickup event is heard, add payload to a queue for driver clients 
-    // let currentClientMessageQueue = clientQueue.read(payload.queueId); 
-
-    // if(!currentClientMessageQueue){ // if there is no <storename> queue in messageQueue then add it to queue
-    //   let queueKey = clientQueue.store(queueId, new Queue());
-      // let driverMessageQueue = clientQueue.read(driverQueueKey);
-    // }
-    // now add payload to driver queue for client
-    // driverMessageQueue.store(payload.payload.messageId, payload);
-
     caps.emit('PICKUP', payload);
   });
 
@@ -81,7 +71,7 @@ caps.on('connection', (socket) => {
   
   // add a received event to server - this event is heard once the vendor successfully reads a payload
   socket.on('RECEIVED', (payload) => {
-    eventLogger(payload, 'received');
+    // eventLogger(payload, 'received');
     let vendorQueue = clientQueue.read(payload.queueId);
     if(!vendorQueue){
       throw new Error('no queue created');
@@ -100,7 +90,7 @@ caps.on('connection', (socket) => {
       Object.keys(vendorQueue.data).forEach(messageId => {
 
         // socket.emit(payload.event, vendorQueue.read(messageId));
-        socket.emit('DELIVERED', vendorQueue.read(messageId));
+        caps.emit('DELIVERED', vendorQueue.read(messageId));
       });
     }
   });
